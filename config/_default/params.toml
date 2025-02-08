@@ -143,6 +143,9 @@ admin = ["ltlylfun"]
 repo = "ltlylfun.github.io"
 clientID = "Ov23liX07IMzgMiW6eo3"
 clientSecret = "a21c2380e48aafc9c2532473ec56c8308090af9d"
+distractionFreeMode = false
+createIssueManually = false
+labels = ["Gitalk"]
 
 [comments.cusdis]
 host = ""
