@@ -1,13 +1,7 @@
 ---
-title: 第一次写blog
+title: 第一次写 blog
 description: 记录我的第一篇博客文章，分享建站经历和感想
 date: 2025-02-08T19:54:09+08:00
-image:
-math:
-license:
-hidden: false
-comments: true
-draft: true
 ---
 
 ## 为什么要搭建个人博客
