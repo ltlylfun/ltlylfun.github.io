@@ -16,3 +16,59 @@
   --card-text-color-secondary: #53565a;
   --card-text-color-tertiary: #888b8d;
 }
+.container {
+  margin-left: auto;
+  margin-right: auto;
+
+  &.extended {
+    /* range: 768-1024 */
+    @include respond(md) {
+      max-width: 1024px;
+      --left-sidebar-max-width: 25%;
+      --right-sidebar-max-width: 30%;
+    }
+
+    /* range: 1024-1280 */
+    @include respond(lg) {
+      max-width: 1280px;
+      --left-sidebar-max-width: 25%;
+      --right-sidebar-max-width: 22%;
+    }
+  }
+
+  &.compact {
+    @include respond(md) {
+      --left-sidebar-max-width: 25%;
+      max-width: 768px;
+    }
+
+    @include respond(lg) {
+      max-width: 1024px;
+      --left-sidebar-max-width: 20%;
+    }
+
+    @include respond(xl) {
+      max-width: 1280px;
+    }
+  }
+}
+html {
+  ::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+}
