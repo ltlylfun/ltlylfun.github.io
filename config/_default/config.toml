@@ -1,5 +1,5 @@
 # Change baseurl before deploy
-baseurl = "http://blog.ltlyl.fun/"
+baseurl = "https://blog.ltlyl.fun/"
 languageCode = "en-us"
 title = "ltlyl"
 
