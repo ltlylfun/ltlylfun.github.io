@@ -13,7 +13,6 @@ published = "Jan 02, 2006"
 lastUpdated = "Jan 02, 2006 15:04 MST"
 
 [sidebar]
-emoji = "👀"
 subtitle = "流动的水没有形状，漂流的风找不到踪迹。"
 
 [sidebar.avatar]
@@ -77,7 +76,7 @@ enabled = true
 ## Comments
 [comments]
 enabled = true
-provider = "disqus"
+provider = "gitalk"
 
 [comments.disqusjs]
 shortname = ""
@@ -139,11 +138,11 @@ reactionsEnabled = 1
 emitMetadata = 0
 
 [comments.gitalk]
-owner = ""
-admin = ""
-repo = ""
-clientID = ""
-clientSecret = ""
+owner = "ltlylfun"
+admin = "ltlylfun"
+repo = "https://ltlylfun.github.io"
+clientID = "Ov23liX07IMzgMiW6eo3"
+clientSecret = "a21c2380e48aafc9c2532473ec56c8308090af9d"
 
 [comments.cusdis]
 host = ""
