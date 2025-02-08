@@ -140,7 +140,7 @@ emitMetadata = 0
 [comments.gitalk]
 owner = "ltlylfun"
 admin = ["ltlylfun"]
-repo = "https://ltlylfun.github.io"
+repo = "ltlylfun.github.io"
 clientID = "Ov23liX07IMzgMiW6eo3"
 clientSecret = "a21c2380e48aafc9c2532473ec56c8308090af9d"
 
