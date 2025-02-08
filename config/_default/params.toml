@@ -76,7 +76,7 @@ enabled = true
 ## Comments
 [comments]
 enabled = true
-provider = "gitalk"
+provider = "giscus"
 
 [comments.disqusjs]
 shortname = ""
@@ -127,13 +127,13 @@ serverName = "cactus.chat"
 siteName = ""
 
 [comments.giscus]
-repo = ""
-repoID = ""
-category = ""
-categoryID = ""
-mapping = ""
-lightTheme = ""
-darkTheme = ""
+repo = "ltlylfun/ltlylfun.github.io"
+repoID = "R_kgDON2LRBA"
+category = "Announcements"
+categoryID = "DIC_kwDON2LRBM4CmxiY"
+mapping = "pathname"
+lightTheme = "light"
+darkTheme = "noborder_gray"
 reactionsEnabled = 1
 emitMetadata = 0
 
@@ -141,8 +141,8 @@ emitMetadata = 0
 owner = "ltlylfun"
 admin = ["ltlylfun"]
 repo = "ltlylfun.github.io"
-clientID = "Ov23liX07IMzgMiW6eo3"
-clientSecret = "a21c2380e48aafc9c2532473ec56c8308090af9d"
+clientID = ""
+clientSecret = ""
 distractionFreeMode = false
 createIssueManually = false
 labels = ["Gitalk"]
