@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CSS on ltlylfun'blog</title><link>https://blog.ltlyl.fun/tags/css/</link><description>Recent content in CSS on ltlylfun'blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 15 Feb 2025 16:35:09 +0800</lastBuildDate><atom:link href="https://blog.ltlyl.fun/tags/css/index.xml" rel="self" type="application/rss+xml"/><item><title>关于CSS的笔记</title><link>https://blog.ltlyl.fun/p/%E5%85%B3%E4%BA%8Ecss%E7%9A%84%E7%AC%94%E8%AE%B0/</link><pubDate>Sat, 15 Feb 2025 16:35:09 +0800</pubDate><guid>https://blog.ltlyl.fun/p/%E5%85%B3%E4%BA%8Ecss%E7%9A%84%E7%AC%94%E8%AE%B0/</guid><description>&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>在前端开发中，CSS（层叠样式表）是一门非常重要的语言，它控制着网页的视觉呈现效果。作为前端三大基础技术（HTML、CSS、JavaScript）之一，掌握 CSS 对于构建优美的用户界面至关重要。&lt;/p>
+&lt;p>希望这些笔记不仅能帮助自己梳理知识体系，也能为其他学习 CSS 的朋友提供参考。&lt;/p>
+&lt;p>PS 不定时更新&lt;/p>
+&lt;h2 id="css-选择器及其优先级">CSS 选择器及其优先级
+&lt;/h2>&lt;ol>
+&lt;li>优先级权重表&lt;/li>
+&lt;/ol>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>选择器类型&lt;/th>
+&lt;th>权重值&lt;/th>
+&lt;th>示例&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>!important&lt;/td>
+&lt;td>∞&lt;/td>
+&lt;td>&lt;code>color: red !important;&lt;/code>&lt;/td>
+&lt;td>最高优先级&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>行内样式&lt;/td>
+&lt;td>1,0,0,0&lt;/td>
+&lt;td>&lt;code>&amp;lt;div style=&amp;quot;...&amp;quot;&amp;gt;&lt;/code>&lt;/td>
+&lt;td>直接在标签上的样式&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ID 选择器&lt;/td>
+&lt;td>0,1,0,0&lt;/td>
+&lt;td>&lt;code>#header&lt;/code>&lt;/td>
+&lt;td>以#开头的选择器&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>类/伪类/属性&lt;/td>
+&lt;td>0,0,1,0&lt;/td>
+&lt;td>&lt;code>.class&lt;/code> &lt;code>:hover&lt;/code> &lt;code>[type=&amp;quot;text&amp;quot;]&lt;/code>&lt;/td>
+&lt;td>类、伪类、属性选择器&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>元素/伪元素&lt;/td>
+&lt;td>0,0,0,1&lt;/td>
+&lt;td>&lt;code>div&lt;/code> &lt;code>::before&lt;/code>&lt;/td>
+&lt;td>标签选择器和伪元素&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>通配符&lt;/td>
+&lt;td>0,0,0,0&lt;/td>
+&lt;td>&lt;code>*&lt;/code>&lt;/td>
+&lt;td>最低优先级&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;ol start="2">
+&lt;li>常用选择器示例表&lt;/li>
+&lt;/ol>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>选择器类型&lt;/th>
+&lt;th>语法&lt;/th>
+&lt;th>示例&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>通配符&lt;/td>
+&lt;td>&lt;code>*&lt;/code>&lt;/td>
+&lt;td>&lt;code>* { margin: 0; }&lt;/code>&lt;/td>
+&lt;td>选择所有元素&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>元素选择器&lt;/td>
+&lt;td>&lt;code>element&lt;/code>&lt;/td>
+&lt;td>&lt;code>p { color: blue; }&lt;/code>&lt;/td>
+&lt;td>选择指定标签&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>类选择器&lt;/td>
+&lt;td>&lt;code>.class&lt;/code>&lt;/td>
+&lt;td>&lt;code>.active { color: red; }&lt;/code>&lt;/td>
+&lt;td>选择指定类名&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ID 选择器&lt;/td>
+&lt;td>&lt;code>#id&lt;/code>&lt;/td>
+&lt;td>&lt;code>#header { height: 60px; }&lt;/code>&lt;/td>
+&lt;td>选择指定 ID&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>属性选择器&lt;/td>
+&lt;td>&lt;code>[attribute]&lt;/code>&lt;/td>
+&lt;td>&lt;code>[type=&amp;quot;text&amp;quot;] { border: 1px solid; }&lt;/code>&lt;/td>
+&lt;td>选择带有特定属性的元素&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;ol start="3">
+&lt;li>组合选择器表&lt;/li>
+&lt;/ol>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>组合方式&lt;/th>
+&lt;th>语法&lt;/th>
+&lt;th>示例&lt;/th>
+&lt;th>优先级计算&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>后代选择器&lt;/td>
+&lt;td>&lt;code>A B&lt;/code>&lt;/td>
+&lt;td>&lt;code>.nav a { color: blue; }&lt;/code>&lt;/td>
+&lt;td>累加(0,0,1,1)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>子选择器&lt;/td>
+&lt;td>&lt;code>A &amp;gt; B&lt;/code>&lt;/td>
+&lt;td>&lt;code>.nav &amp;gt; a { color: red; }&lt;/code>&lt;/td>
+&lt;td>累加(0,0,1,1)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>相邻兄弟&lt;/td>
+&lt;td>&lt;code>A + B&lt;/code>&lt;/td>
+&lt;td>&lt;code>h2 + p { margin: 10px; }&lt;/code>&lt;/td>
+&lt;td>累加(0,0,0,2)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>通用兄弟&lt;/td>
+&lt;td>&lt;code>A ~ B&lt;/code>&lt;/td>
+&lt;td>&lt;code>h2 ~ p { color: gray; }&lt;/code>&lt;/td>
+&lt;td>累加(0,0,0,2)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;ol start="4">
+&lt;li>伪类和伪元素表&lt;/li>
+&lt;/ol>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>类型&lt;/th>
+&lt;th>示例&lt;/th>
+&lt;th>优先级&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>伪类&lt;/td>
+&lt;td>&lt;code>:hover&lt;/code>&lt;/td>
+&lt;td>0,0,1,0&lt;/td>
+&lt;td>特定状态的样式&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>伪类&lt;/td>
+&lt;td>&lt;code>:first-child&lt;/code>&lt;/td>
+&lt;td>0,0,1,0&lt;/td>
+&lt;td>位置相关的样式&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>伪元素&lt;/td>
+&lt;td>&lt;code>::before&lt;/code>&lt;/td>
+&lt;td>0,0,0,1&lt;/td>
+&lt;td>创建额外的元素&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>伪元素&lt;/td>
+&lt;td>&lt;code>::first-line&lt;/code>&lt;/td>
+&lt;td>0,0,0,1&lt;/td>
+&lt;td>特殊的文本样式&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;ol start="5">
+&lt;li>复杂选择器优先级计算表&lt;/li>
+&lt;/ol>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>选择器&lt;/th>
+&lt;th>计算方式&lt;/th>
+&lt;th>最终优先级&lt;/th>
+&lt;th>说明&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>.header.active&lt;/code>&lt;/td>
+&lt;td>(0,0,1,0) + (0,0,1,0)&lt;/td>
+&lt;td>0,0,2,0&lt;/td>
+&lt;td>多类选择器&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>#nav .list li&lt;/code>&lt;/td>
+&lt;td>(0,1,0,0) + (0,0,1,0) + (0,0,0,1)&lt;/td>
+&lt;td>0,1,1,1&lt;/td>
+&lt;td>ID+类+元素&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>.nav a:hover&lt;/code>&lt;/td>
+&lt;td>(0,0,1,0) + (0,0,0,1) + (0,0,1,0)&lt;/td>
+&lt;td>0,0,2,1&lt;/td>
+&lt;td>类+元素+伪类&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item></channel></rss>
