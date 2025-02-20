@@ -3,8 +3,9 @@ title: 关于CSS的笔记
 description: 记录一些CSS笔记
 date: 2025-02-15T16:35:09+08:00
 comments: true
+keywords: [CSS]
 categories:
-  - css-notes
+  - CSS-Notes
 tags:
   - CSS
 ---
@@ -15,7 +16,7 @@ tags:
 
 希望这些笔记不仅能帮助自己梳理知识体系，也能为其他学习 CSS 的朋友提供参考。
 
-PS 不定时更新
+PS 不定时更新，欢迎讨论区留言。
 
 ## CSS 选择器及其优先级
 
