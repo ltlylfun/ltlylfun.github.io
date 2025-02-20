@@ -1,6 +1,6 @@
 ---
 title: 关于HTTP/HTTPS的笔记
-description: HTTP/HTTPS
+description: 记录一些HTTP/HTTPS笔记
 date: 2025-02-20T12:26:09+08:00
 comments: true
 keywords: [HTTP, HTTPS, 笔记]
