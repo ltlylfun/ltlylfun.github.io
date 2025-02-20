@@ -361,3 +361,7 @@ function test() {
 // 运行测试
 test();
 ```
+
+## 总结
+
+![排序总结](sorting_algorithms_comparison.png)
