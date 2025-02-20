@@ -1,7 +1,7 @@
 ---
-title: css-notes
+title: CSS-Notes
 description: CSS相关的学习笔记
-image: css3-original.svg
+image: file-type-css.svg
 
 # Badge style
 style:
