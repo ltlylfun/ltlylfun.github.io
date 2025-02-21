@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TypeScript-Notes on ltlylfunBlog</title><link>https://blog.ltlyl.fun/categories/typescript-notes/</link><description>Recent content in TypeScript-Notes on ltlylfunBlog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 18 Feb 2025 20:20:09 +0800</lastBuildDate><atom:link href="https://blog.ltlyl.fun/categories/typescript-notes/index.xml" rel="self" type="application/rss+xml"/><item><title>关于TypeScript的笔记</title><link>https://blog.ltlyl.fun/p/%E5%85%B3%E4%BA%8Etypescript%E7%9A%84%E7%AC%94%E8%AE%B0/</link><pubDate>Tue, 18 Feb 2025 20:20:09 +0800</pubDate><guid>https://blog.ltlyl.fun/p/%E5%85%B3%E4%BA%8Etypescript%E7%9A%84%E7%AC%94%E8%AE%B0/</guid><description>&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>在前端开发中，TypeScript 是一门非常重要的语言，它为 JavaScript 引入了静态类型检查，提升了代码的可靠性和可维护性，对于构建健壮的应用程序至关重要。&lt;/p>
+&lt;p>希望这些笔记不仅能帮助自己梳理知识体系，也能为其他使用 TypeScript 的开发者提供参考和启发。&lt;/p>
+&lt;p>PS 不定时更新，欢迎讨论区留言。&lt;/p>
+&lt;h2 id="类型声明">类型声明
+&lt;/h2></description></item></channel></rss>
