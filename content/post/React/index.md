@@ -10,6 +10,10 @@ tags:
   - React
 ---
 
+## 前言
+
+本笔记不是零基础笔记
+
 ## React 组件名称
 
 React 组件是常规的 JavaScript 函数，但 组件的名称必须以**大写字母开头**，否则它们将无法运行！
@@ -238,3 +242,183 @@ export default function Signup() {
   );
 }
 ```
+
+## useState
+
+### 设置 state 不会更改现有渲染中的变量，但会请求一次新的渲染。
+
+设置 state 的调用是在告诉 React："组件状态已更新，请安排一个新的渲染周期来反映这一变化。"
+
+1. 当你调用 setState 时，React 并不会立即修改当前渲染（即已经生成的虚拟 DOM）中的变量。这意味着，在当前的渲染过程中，你依然看到的是旧的状态值。
+
+2. setState 调用其实是异步的。它会在内部标记组件需要更新，但真正的更新和重新渲染会在稍后的时机发生（通常是在事件处理结束或其他合适的时机）。更新后的状态会在下一次渲染时生效。
+
+3. 当新的渲染触发后，React 会创建一个全新的虚拟 DOM，并使用更新后的 state 生成新的 UI，然后再比较前后两次虚拟 DOM 的变化，并只更新浏览器中实际变动的部分（即“调和”过程）。
+
+总结来说，设置 state 不会修改当前渲染的变量，它只是请求一次新的渲染，在下一个渲染周期中使用新的 state 来重新计算和更新 UI。这种机制有助于保持组件状态的不可变性和渲染的一致性。
+
+### React 会在事件处理函数执行完成之后处理 state 更新。这被称为批处理。
+
+只有在你的事件处理函数及其中任何代码执行完成 之后，UI 才会更新。这种特性也就是 批处理，它会使你的 React 应用运行得更快。它还会帮你避免处理只 ​​ 更新了一部分 state 变量的令人困惑的“半成品”渲染。
+
+React 不会跨 多个 需要刻意触发的事件（如点击）进行批处理——每次点击都是单独处理的。请放心，React 只会在一般来说安全的情况下才进行批处理。这可以确保，例如，如果第一次点击按钮会禁用表单，那么第二次点击就不会再次提交它。
+
+### 要在一个事件中多次更新某些 state，你可以使用 setNumber(n => n + 1) 更新函数。
+
+### 将 state 视为只读的
+
+```
+onPointerMove={e => {
+  position.x = e.clientX;
+  position.y = e.clientY;
+}}
+```
+
+这段代码直接修改了 上一次渲染中 分配给 position 的对象。但是因为并没有使用 state 的设置函数，React 并不知道对象已更改。所以 React 没有做出任何响应。虽然在一些情况下，直接修改 state 可能是有效的，但并不推荐这么做。你应该把在渲染过程中可以访问到的 state 视为只读的。
+
+在这种情况下，为了真正地 触发一次重新渲染，你需要创建一个新对象并把它传递给 state 的设置函数：
+
+```
+onPointerMove={e => {
+  setPosition({
+    x: e.clientX,
+    y: e.clientY
+  });
+}}
+```
+
+通过使用 setPosition，你在告诉 React：
+
+使用这个新的对象替换 position 的值,然后再次渲染这个组件
+
+### 局部 mutation 是可以接受的
+
+像这样的代码是有问题的，因为它改变了 state 中现有的对象：
+
+```
+position.x = e.clientX;
+position.y = e.clientY;
+```
+
+但是像这样的代码就 没有任何问题，因为你改变的是你刚刚创建的一个新的对象：
+
+```
+const nextPosition = {};
+nextPosition.x = e.clientX;
+nextPosition.y = e.clientY;
+setPosition(nextPosition);
+```
+
+事实上，它完全等同于下面这种写法：
+
+```
+setPosition({
+  x: e.clientX,
+  y: e.clientY
+});
+```
+
+只有当你改变已经处于 state 中的 现有 对象时，mutation 才会成为问题。而修改一个你刚刚创建的对象就不会出现任何问题，因为 还没有其他的代码引用它。改变它并不会意外地影响到依赖它的东西。这叫做“局部 mutation”。你甚至可以 在渲染的过程中 进行“局部 mutation”的操作。这种操作既便捷又没有任何问题！
+
+### 使用展开语法复制对象
+
+下面这行代码修改了上一次渲染中的 state：
+
+```
+person.firstName = e.target.value;
+```
+
+想要实现你的需求，最可靠的办法就是创建一个新的对象并将它传递给 setPerson。但是在这里，你还需要 把当前的数据复制到新对象中，因为你只改变了其中一个字段：
+
+```
+setPerson({
+  firstName: e.target.value, // 从 input 中获取新的 first name
+  lastName: person.lastName,
+  email: person.email
+});
+```
+
+你可以使用`...`对象展开 语法，这样你就不需要单独复制每个属性。
+
+```
+setPerson({
+  ...person, // 复制上一个 person 中的所有字段
+  firstName: e.target.value // 但是覆盖 firstName 字段
+});
+```
+
+对于大型表单，将所有数据都存放在同一个对象中是非常方便的——前提是你能够正确地更新它！
+
+请注意`...`展开语法本质是是“浅拷贝”——它只会复制一层。这使得它的执行速度很快，但是也意味着当你想要更新一个嵌套属性时，你必须得多次使用展开语法。
+
+### 更新一个嵌套对象
+
+考虑下面这种结构的嵌套对象：
+
+```
+const [person, setPerson] = useState({
+  name: 'Niki de Saint Phalle',
+  artwork: {
+    title: 'Blue Nana',
+    city: 'Hamburg',
+    image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+  }
+});
+```
+
+如果你想要更新 person.artwork.city 的值，用 mutation 来实现的方法非常容易理解：
+
+```
+person.artwork.city = 'New Delhi';
+```
+
+但是在 React 中，你需要将 state 视为不可变的！为了修改 city 的值，你首先需要创建一个新的 artwork 对象（其中预先填充了上一个 artwork 对象中的数据），然后创建一个新的 person 对象，并使得其中的 artwork 属性指向新创建的 artwork 对象：
+
+```
+const nextArtwork = { ...person.artwork, city: 'New Delhi' };
+const nextPerson = { ...person, artwork: nextArtwork };
+setPerson(nextPerson);
+```
+
+或者，写成一个函数调用：
+
+```
+setPerson({
+  ...person, // 复制其它字段的数据
+  artwork: { // 替换 artwork 字段
+    ...person.artwork, // 复制之前 person.artwork 中的数据
+    city: 'New Delhi' // 但是将 city 的值替换为 New Delhi！
+  }
+});
+```
+
+### 使用 Immer 编写简洁的更新逻辑
+
+如果你的 state 有多层的嵌套，你或许应该考虑 将其扁平化。但是，如果你不想改变 state 的数据结构，你可能更喜欢用一种更便捷的方式来实现嵌套展开的效果。Immer 是一个非常流行的库，它可以让你使用简便但可以直接修改的语法编写代码，并会帮你处理好复制的过程。通过使用 Immer，你写出的代码看起来就像是你“打破了规则”而直接修改了对象：
+
+```
+updatePerson(draft => {
+  draft.artwork.city = 'Lagos';
+});
+```
+
+但是不同于一般的 mutation，它并不会覆盖之前的 state！
+
+尝试使用 Immer:
+
+- 运行 `npm install use-immer` 添加 Immer 依赖
+- 用 `import { useImmer } from 'use-immer'` 替换掉 `import { useState } from 'react'`
+
+### 在没有 mutation 的前提下更新数组
+
+在 JavaScript 中，数组只是另一种对象。同对象一样，你需要将 React state 中的数组视为只读的。这意味着你不应该使用类似于 arr[0] = 'bird' 这样的方式来重新分配数组中的元素，也不应该使用会直接修改原始数组的方法，例如 push() 和 pop()。
+
+相反，每次要更新一个数组时，你需要把一个新的数组传入 state 的 setting 方法中。为此，你可以通过使用像 filter() 和 map() 这样不会直接修改原始值的方法，从原始数组生成一个新的数组。然后你就可以将 state 设置为这个新生成的数组。
+
+下面是常见数组操作的参考表。当你操作 React state 中的数组时，你需要避免使用左列的方法，而首选右列的方法：
+| 操作 | 避免使用 (会改变原始数组) | 推荐使用 (会返回一个新数组） |
+|----------|-------------------------------|--------------------------------|
+| 添加元素 | push，unshift | concat，[...arr] 展开语法 |
+| 删除元素 | pop，shift，splice | filter，slice |
+| 替换元素 | splice，arr[i] = ... 赋值 | map |
+| 排序 | reverse，sort | 先将数组复制一份 |
