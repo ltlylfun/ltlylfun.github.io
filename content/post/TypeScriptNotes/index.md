@@ -215,3 +215,87 @@ if (true) {
 ```
 
 上面示例中，存在两个代码块，其中分别有一个类型 T 的声明。这两个声明都只在自己的代码块内部有效，在代码块外部无效。
+
+## 数组
+
+### 使用方括号语法
+
+最常见的方式是直接在类型后面加上方括号 `[]` 表示数组类型。
+
+```typescript name=example1.ts
+let numbers: number[] = [1, 2, 3, 4, 5];
+let fruits: string[] = ["apple", "banana", "cherry"];
+```
+
+### 使用泛型语法
+
+TypeScript 提供了泛型数组语法 `Array<元素类型>`，其效果与方括号语法完全相同。
+
+```typescript name=example2.ts
+let numbers: Array<number> = [1, 2, 3, 4, 5];
+let fruits: Array<string> = ["apple", "banana", "cherry"];
+```
+
+### 多维数组
+
+多维数组是数组的数组。例如，二维数组可以表示为数组中的每个元素都是一个数组。
+
+```typescript name=example4.ts
+let matrix: number[][] = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
+];
+
+console.log(matrix);
+// 输出:
+// [
+//   [1, 2],
+//   [3, 4],
+//   [5, 6]
+// ]
+```
+
+### 元组
+
+在 TypeScript 中，元组（Tuple）是一种特殊类型的数组，它允许你在同一个数组中存储多个不同类型的值，同时要求元素的个数和顺序固定。使用元组，能够更明确地描述混合类型数据的结构。
+
+- 定义元组
+
+你可以使用带有固定数量和类型的元素来定义元组。例如，下面我们定义了一个包含数字和字符串的元组：
+
+```typescript name=ExampleTuple.ts
+let user: [number, string] = [1, "Alice"];
+
+// 正确: 按照定义提供了 number 和 string 类型的值
+console.log(user);
+
+// 错误示例: 交换顺序会导致类型错误
+// let wrongUser: [number, string] = ["Alice", 1];
+```
+
+- 元组的解构赋值
+
+元组支持解构赋值，你可以直接把元组的每个元素赋值给单独的变量：
+
+```typescript name=DestructureTuple.ts
+let user: [number, string] = [1, "Alice"];
+let [userId, userName] = user;
+
+console.log(userId); // 输出: 1
+console.log(userName); // 输出: Alice
+```
+
+- 可选的元组元素
+
+TypeScript 允许在元组中定义可选元素，这些可选元素必须放在元组的末尾。例如：
+
+```typescript name=OptionalTuple.ts
+let response: [number, string?] = [200];
+
+console.log(response); // 输出: [200]
+
+// 此外，也可以提供所有元素
+let fullResponse: [number, string?] = [200, "OK"];
+console.log(fullResponse); // 输出: [200, "OK"]
+```
