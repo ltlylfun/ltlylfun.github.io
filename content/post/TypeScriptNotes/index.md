@@ -18,4 +18,200 @@ tags:
 
 PS 不定时更新，欢迎讨论区留言。
 
-## 类型声明
+## 类型系统
+
+### 基本类型
+
+在 TypeScript 中，类型系统包括许多基本类型，用于描述数据的不同形态。下面列出了常见的基本类型及其示例代码：
+
+1. boolean（布尔类型）
+   用于表示逻辑值 `true` 或 `false`。
+
+```typescript
+let isActive: boolean = true;
+```
+
+2. string（字符串类型）
+   用于表示文本数据，可使用单引号、双引号或模板字符串。
+
+```typescript
+let greeting: string = "Hello, TypeScript!";
+```
+
+3. number（数字类型）
+   用于表示整数、浮点数、十六进制、二进制和八进制字面量。
+
+```typescript
+let age: number = 30;
+let hex: number = 0xf00d;
+let binary: number = 0b1010;
+let octal: number = 0o744;
+```
+
+4. bigint（大整数类型）
+   用于表示大于 `2^53 - 1` 的整数。字面量后缀 `n` 用于标识 bigint 类型。
+
+```typescript
+let bigNumber: bigint = 123456789012345678901234567890n;
+```
+
+5. symbol（符号类型）
+   用于创建独一无二的标识符，常用于对象属性的键。
+
+```typescript
+let uniqueKey: symbol = Symbol("uniqueKey");
+```
+
+6. object（对象类型）
+   表示除基本类型之外的所有类型。用于描述具有属性的复合数据结构。
+
+```typescript
+let person: object = { name: "Alice", age: 25 };
+```
+
+7. undefined（未定义类型）
+   表示未赋值状态，只有一个唯一值 `undefined`。
+
+```typescript
+let nothing: undefined = undefined;
+```
+
+8. null（空值类型）
+   表示空或不存在的值，只有一个唯一值 `null`。
+
+```typescript
+let empty: null = null;
+```
+
+### 联合类型
+
+在 TypeScript 中，联合类型（Union Types）允许一个变量可以是多个类型中的一个。使用 `|` 来分隔各个可能的类型，从而定义一个变量可能接受的所有类型。联合类型使得代码更具灵活性，同时保持静态类型检查的优势。
+
+例如，下面这个变量可以是数字或者字符串：
+
+```typescript
+let value: number | string;
+value = 42;
+value = "Hello, TypeScript!";
+
+// 如果赋值为其他类型，例如 boolean，则会报错：
+// value = true; // Error: Type 'boolean' is not assignable to type 'number | string'.
+```
+
+### 交叉类型
+
+在 TypeScript 中，交叉类型（Intersection Types）允许你将多个类型合并为一个类型。当一个变量同时满足多个独立类型的要求时，就可以使用交叉类型。这种类型表示法使用 `&` 来连接各个类型，从而创建出一个新的类型，该类型包含所有合并类型的属性和方法。
+
+假设我们有两个接口，分别描述了不同的属性：
+
+```typescript
+interface Person {
+  name: string;
+  age: number;
+}
+
+interface Employee {
+  employeeId: number;
+  department: string;
+}
+```
+
+我们可以使用交叉类型将这两个接口合并，创建一个既是 `Person` 又是 `Employee` 的类型：
+
+```typescript
+type Manager = Person & Employee;
+
+const manager: Manager = {
+  name: "Alice",
+  age: 30,
+  employeeId: 12345,
+  department: "Sales",
+};
+```
+
+在这个例子中，`Manager` 类型必须同时具有 `Person` 和 `Employee` 的所有属性。
+
+### type
+
+`type`命令用来定义一个类型的别名。
+
+```
+type Age = number;
+
+let age:Age = 55;
+```
+
+上面示例中，`type`命令为 number 类型定义了一个别名 Age。这样就能像使用 number 一样，使用 Age 作为类型。
+
+别名可以让类型的名字变得更有意义，也能增加代码的可读性，还可以使复杂类型用起来更方便，便于以后修改变量的类型。
+
+别名不允许重名。
+
+```
+type Color = 'red';
+type Color = 'blue'; // 报错
+```
+
+上面示例中，同一个别名 Color 声明了两次，就报错了。
+
+别名的作用域是块级作用域。这意味着，代码块内部定义的别名，影响不到外部。
+
+### TypeScript `typeof` 操作符
+
+在 TypeScript 中，`typeof` 操作符有两种主要用途：
+
+- 获取一个表达式在运行时的类型（类似于 JavaScript 中的 `typeof`）。
+- 在类型层面上查询变量或表达式的类型，以便在其他地方重用该类型（类型查询）。
+
+1. 运行时使用 `typeof`
+
+在运行时，`typeof` 操作符返回一个字符串，描述了一个值的类型。这与 JavaScript 完全一致。常见的返回值包括 `"string"`, `"number"`, `"boolean"`, `"undefined"`, `"object"`, 和 `"function"`。
+
+例如：
+
+```typescript name=RuntimeTypeof.ts
+const someValue = 42;
+
+if (typeof someValue === "number") {
+  console.log("someValue 是一个数字");
+}
+```
+
+2. 类型层面上的 `typeof`（类型查询）
+
+TypeScript 允许你在类型层面上使用 `typeof` 来获取一个变量或对象的类型，并将其用于类型声明中。这种用法称为“类型查询”，它可以帮助你重用已有的类型，而无需重复编写接口或类型定义。
+
+例如：
+
+```typescript name=TypeQueryExample.ts
+const person = {
+  name: "Alice",
+  age: 30,
+};
+
+// 使用 typeof person 获取 person 的类型，并创建一个类型别名
+type PersonType = typeof person;
+
+const anotherPerson: PersonType = {
+  name: "Bob",
+  age: 25,
+};
+```
+
+在这个例子中，`typeof person` 获取了 `person` 变量的类型，并创建了名为 `PersonType` 的类型，这样可以避免手动定义重复的类型结构。
+
+### 块级类型声明
+
+TypeScript 支持块级类型声明，即类型可以声明在代码块（用大括号表示）里面，并且只在当前代码块有效。
+
+```
+if (true) {
+  type T = number;
+  let v:T = 5;
+} else {
+  type T = string;
+  let v:T = 'hello';
+}
+```
+
+上面示例中，存在两个代码块，其中分别有一个类型 T 的声明。这两个声明都只在自己的代码块内部有效，在代码块外部无效。
