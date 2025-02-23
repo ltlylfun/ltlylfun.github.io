@@ -299,3 +299,316 @@ console.log(response); // 输出: [200]
 let fullResponse: [number, string?] = [200, "OK"];
 console.log(fullResponse); // 输出: [200, "OK"]
 ```
+
+## 函数类型
+
+### 函数声明
+
+通过函数声明，你可以直接在函数签名中定义参数和返回值的类型。
+
+```typescript name=functionDeclaration.ts
+function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet("Alice"));
+```
+
+### 函数表达式
+
+你也可以使用函数表达式的方式定义函数，同时为变量指定函数类型。
+
+```typescript name=functionExpression.ts
+const add: (a: number, b: number) => number = function (a, b) {
+  return a + b;
+};
+
+console.log(add(2, 3));
+```
+
+### 可选参数和默认参数
+
+TypeScript 允许在函数中使用可选参数和默认参数，使得函数调用更灵活。
+
+```typescript name=optionalDefaultParameters.ts
+// 可选参数 lastName 使用 ? 标记
+function buildName(firstName: string, lastName?: string): string {
+  return lastName ? `${firstName} ${lastName}` : firstName;
+}
+
+console.log(buildName("John"));
+console.log(buildName("John", "Doe"));
+
+// 默认参数 b 默认值为 2
+function multiply(a: number, b: number = 2): number {
+  return a * b;
+}
+
+console.log(multiply(5)); // 输出: 10
+console.log(multiply(5, 3)); // 输出: 15
+```
+
+### 剩余参数
+
+当函数需要接受任意数量的参数时，可以使用剩余参数（rest parameters）。
+
+```typescript name=restParameters.ts
+function joinStrings(separator: string, ...strings: string[]): string {
+  return strings.join(separator);
+}
+
+console.log(joinStrings(", ", "apple", "banana", "cherry")); // 输出: apple, banana, cherry
+```
+
+### 函数类型作为参数和返回值
+
+TypeScript 可以定义函数类型，将其用作参数类型或返回值类型，从而实现高阶函数。
+
+```typescript name=higherOrderFunction.ts
+// 定义一个函数类型 Operation
+type Operation = (a: number, b: number) => number;
+
+// 实现加法函数
+const add: Operation = (a, b) => a + b;
+
+// 高阶函数，接收一个 Operation 类型的函数作为参数
+function calculate(a: number, b: number, op: Operation): number {
+  return op(a, b);
+}
+
+console.log(calculate(4, 5, add)); // 输出: 9
+```
+
+### 函数重载
+
+函数重载允许同一个函数根据不同的参数类型或数量提供多种签名，从而实现多态。
+
+```typescript name=overloadFunctions.ts
+// 函数重载的声明
+function combine(x: string, y: string): string;
+function combine(x: number, y: number): number;
+
+// 实现函数重载的函数体
+function combine(x: any, y: any): any {
+  return x + y;
+}
+
+console.log(combine("Hello, ", "World!")); // 输出: Hello, World!
+console.log(combine(10, 20)); // 输出: 30
+```
+
+## 对象
+
+### 使用接口定义对象类型
+
+```typescript name=UserInterface.ts
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  // 可选属性, 如果没有提供不会报错
+  age?: number;
+  // 只读属性, 一旦赋值后就不能修改
+  readonly createdAt: Date;
+}
+
+const user: User = {
+  id: 1,
+  name: "Alice",
+  email: "alice@example.com",
+  createdAt: new Date(),
+};
+
+// 下面的修改将发生错误，因为 createdAt 是只读属性
+// user.createdAt = new Date();
+console.log(user);
+```
+
+### 使用类型别名定义对象类型
+
+```typescript name=UserTypeAlias.ts
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  age?: number; // 可选属性
+  readonly createdAt: Date; // 只读属性
+};
+
+const user: User = {
+  id: 2,
+  name: "Bob",
+  email: "bob@example.com",
+  createdAt: new Date(),
+};
+
+console.log(user);
+```
+
+### 定义对象上的方法
+
+除了描述属性，TypeScript 的对象类型同样可以描述方法。下面是一个例子：
+
+```typescript name=UserWithMethods.ts
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  greet(): string;
+}
+
+const user: User = {
+  id: 3,
+  name: "Charlie",
+  email: "charlie@example.com",
+  greet() {
+    return `Hello, my name is ${this.name}`;
+  },
+};
+
+console.log(user.greet());
+```
+
+### 对象字面量的类型检查
+
+在 TypeScript 中，当你直接使用对象字面量创建对象时，编译器会对属性的存在性和类型进行严格检查。这帮助我们发现拼写错误或遗漏的属性：
+
+```typescript name=LiteralObjects.ts
+interface Config {
+  port: number;
+  host: string;
+}
+
+const config: Config = {
+  port: 8080,
+  host: "localhost",
+  // 如果加上多余属性，例如 protocol: "http"，编译器将报错
+};
+
+console.log(`Server running at http://${config.host}:${config.port}`);
+```
+
+### 使用索引签名定义动态属性的对象
+
+当你需要定义一个包含动态属性名的对象时，可以使用索引签名。如下例子展示了如何定义一个可以包含任意字符串键及其对应值的对象：
+
+```typescript name=Dictionary.ts
+interface Dictionary {
+  [key: string]: string;
+}
+
+const translations: Dictionary = {
+  hello: "你好",
+  goodbye: "再见",
+};
+
+console.log(translations.hello);
+```
+
+## interface
+
+### 定义基本接口
+
+下面的示例展示了如何定义一个接口 `User`，描述用户对象的属性：
+
+```typescript name=UserInterface.ts
+interface User {
+  id: number;
+  name: string;
+  age: number;
+  email?: string; // 可选属性，用 ? 标记
+}
+
+const user: User = {
+  id: 1,
+  name: "Alice",
+  age: 30,
+  email: "alice@example.com",
+};
+
+console.log(user);
+```
+
+### 接口中的只读属性
+
+接口可以定义只读属性，一旦对象被创建后，这些属性就不能被修改，从而增强数据的安全性。
+
+```typescript name=ReadOnlyUser.ts
+interface ReadOnlyUser {
+  readonly id: number;
+  name: string;
+}
+
+const user: ReadOnlyUser = {
+  id: 100,
+  name: "Bob",
+};
+
+// 下面这行代码会报错，因为 id 是只读属性
+// user.id = 101;
+```
+
+### 接口中的方法
+
+可以在接口中定义方法，这样实现接口的对象必须提供方法的具体实现。
+
+```typescript name=UserWithMethods.ts
+interface User {
+  id: number;
+  name: string;
+  greet(message: string): string;
+}
+
+const user: User = {
+  id: 2,
+  name: "Charlie",
+  greet(message: string) {
+    return `Hello ${this.name}, ${message}`;
+  },
+};
+
+console.log(user.greet("welcome!"));
+```
+
+### 接口的嵌套和继承
+
+接口不仅可以描述简单对象，还可以通过嵌套和继承来构建更复杂的类型结构。
+
+```typescript name=ExtendInterface.ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+interface Employee extends Person {
+  employeeId: number;
+  department: string;
+}
+
+const employee: Employee = {
+  name: "David",
+  age: 28,
+  employeeId: 12345,
+  department: "Engineering",
+};
+
+console.log(employee);
+```
+
+### 使用接口描述函数类型
+
+接口同样可以用来描述函数类型，这样可以明确函数的参数和返回值类型，提高代码的可读性和稳定性。
+
+```typescript name=FunctionInterface.ts
+interface Comparator {
+  (a: number, b: number): number;
+}
+
+const compare: Comparator = (x, y) => {
+  if (x < y) return -1;
+  if (x > y) return 1;
+  return 0;
+};
+
+console.log(compare(3, 5));
+```
