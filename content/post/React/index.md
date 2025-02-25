@@ -535,3 +535,140 @@ useEffect(() => {
   省略始终稳定的依赖项仅在 linter 能“看到”对象是稳定的时候才有效。例如，如果 ref 是从父组件传递过来的，则必须在依赖数组中指定它。这很有必要，因为你无法确定父组件是一直传递相同的 ref，还是根据条件传递不同的 ref。所以，你的 Effect 会依赖于被传递的是哪个 ref。
 
 - React 会在每次 Effect 重新运行之前调用清理函数，并在组件卸载（被移除）时最后一次调用清理函数。
+
+## useMemo(性能优化的手段)
+
+### 用法
+
+```
+import { useMemo } from 'react';
+
+function TodoList({ todos, tab, theme }) {
+  const visibleTodos = useMemo(() => filterTodos(todos, tab), [todos, tab]);
+  // ...
+}
+```
+
+你需要给 useMemo 传递两样东西：
+
+- 一个没有任何参数的 calculation 函数，像这样 () =>，并且返回任何你想要的计算结果。
+- 一个由包含在你的组件中并在 calculation 中使用的所有值组成的 依赖列表。
+
+在初次渲染时，你从 useMemo 得到的 值 将会是你的 calculation 函数执行的结果。
+
+在随后的每一次渲染中，React 将会比较前后两次渲染中的 所有依赖项 是否相同。如果通过 Object.is 比较所有依赖项都没有发生变化，那么 useMemo 将会返回之前已经计算过的那个值。否则，React 将会重新执行 calculation 函数并且返回一个新的值。
+
+换言之，useMemo 在多次重新渲染中缓存了 calculation 函数计算的结果直到依赖项的值发生变化。
+
+## useCallback
+
+### 用法
+
+当你优化渲染性能的时候，有时需要缓存传递给子组件的函数。让我们先关注一下如何实现，稍后去理解在哪些场景中它是有用的。
+
+为了缓存组件中多次渲染的函数，你需要将其定义在 useCallback Hook 中：
+
+```
+import { useCallback } from 'react';
+
+function ProductPage({ productId, referrer, theme }) {
+  const handleSubmit = useCallback((orderDetails) => {
+    post('/product/' + productId + '/buy', {
+      referrer,
+      orderDetails,
+    });
+  }, [productId, referrer]);
+  // ...
+```
+
+你需要传递两个参数给 useCallback：
+
+在多次渲染中需要缓存的函数
+
+- 函数内部需要使用到的所有组件内部值的 依赖列表。
+- 初次渲染时，在 useCallback 处接收的 返回函数 将会是已经传入的函数。
+
+在之后的渲染中，React 将会使用 Object.is 把 当前的依赖 和已传入之前的依赖进行比较。如果没有任何依赖改变，useCallback 将会返回与之前一样的函数。否则 useCallback 将返回 此次 渲染中传递的函数。
+
+简而言之，useCallback 在多次渲染中缓存一个函数，直至这个函数的依赖发生改变。
+
+## useCallback 与 useMemo 有何关系？
+
+useMemo 经常与 useCallback 一同出现。当尝试优化子组件时，它们都很有用。他们会 记住（或者说，缓存）正在传递的东西：
+
+```
+import { useMemo, useCallback } from 'react';
+
+function ProductPage({ productId, referrer }) {
+  const product = useData('/product/' + productId);
+
+  const requirements = useMemo(() => { //调用函数并缓存结果
+    return computeRequirements(product);
+  }, [product]);
+
+  const handleSubmit = useCallback((orderDetails) => { // 缓存函数本身
+    post('/product/' + productId + '/buy', {
+      referrer,
+      orderDetails,
+    });
+  }, [productId, referrer]);
+
+  return (
+    <div className={theme}>
+      <ShippingForm requirements={requirements} onSubmit={handleSubmit} />
+    </div>
+  );
+}
+```
+
+区别在于你需要缓存 什么:
+
+- useMemo 缓存函数调用的结果。在这里，它缓存了调用 computeRequirements(product) 的结果。除非 product 发生改变，否则它将不会发生变化。这让你向下传递 requirements 时而无需不必要地重新渲染 ShippingForm。必要时，React 将会调用传入的函数重新计算结果。
+- useCallback 缓存函数本身。不像 useMemo，它不会调用你传入的函数。相反，它缓存此函数。从而除非 productId 或 referrer 发生改变，handleSubmit 自己将不会发生改变。这让你向下传递 handleSubmit 函数而无需不必要地重新渲染 ShippingForm。直至用户提交表单，你的代码都将不会运行。
+
+如果你已经熟悉了 useMemo，你可能发现将 useCallback 视为以下内容会很有帮助：
+
+```
+// 在 React 内部的简化实现
+function useCallback(fn, dependencies) {
+  return useMemo(() => fn, dependencies);
+}
+```
+
+## useImperativeHandle
+
+```
+useImperativeHandle(ref, createHandle, dependencies?)
+```
+
+在组件顶层通过调用 useImperativeHandle 来自定义 ref 暴露出来的句柄：
+
+```
+import { useImperativeHandle } from 'react';
+
+function MyInput({ ref }) {
+  useImperativeHandle(ref, () => {
+    return {
+      // ... 你的方法 ...
+    };
+  }, []);
+  // ...
+```
+
+参数
+
+- ref：该 ref 是你从 MyInput 组件的 prop 中提取的参数。
+
+- createHandle：该函数无需参数，它返回你想要暴露的 ref 的句柄。该句柄可以包含任何类型。通常，你会返回一个包含你想暴露的方法的对象。
+
+- 可选的 dependencies：函数 createHandle 代码中所用到的所有反应式的值的列表。反应式的值包含 props、状态和其他所有直接在你组件体内声明的变量和函数。倘若你的代码检查器已 为 React 配置好，它会验证每一个反应式的值是否被正确指定为依赖项。该列表的长度必须是一个常数项，并且必须按照 [dep1, dep2, dep3] 的形式罗列各依赖项。React 会使用 Object.is 来比较每一个依赖项与其对应的之前值。如果一次重新渲染导致某些依赖项发生了改变，或你没有提供这个参数列表，你的函数 createHandle 将会被重新执行，而新生成的句柄则会被分配给 ref。
+
+注意
+
+```
+从 React 19 开始，ref 可以作为 prop 使用。在 React 18 及更早版本中，必须从 forwardRef 获取 ref。
+```
+
+## 问题拓展
+
+### 怎么判断一个对象是否是 React 元素
