@@ -172,6 +172,9 @@ HTTP（超文本传输协议）和 HTTPS（安全超文本传输协议）是用�
 
 ### TLS 握手的简单描述
 
+![blibli 技术蛋老师视频截图](https.png)
+[blibli 技术蛋老师 https 视频](https://www.bilibili.com/video/BV1KY411x7Jp/?share_source=copy_web&vd_source=3b63c0fccbecf1d3b621910b49a7a8b3 "blibli 技术蛋老师https视频")
+
 1. **ClientHello**
 
    - 客户端发起连接，发送 `ClientHello` 消息。
