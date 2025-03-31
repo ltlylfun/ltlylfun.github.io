@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>React on ltlylfunBlog</title><link>https://blog.ltlyl.fun/tags/react/</link><description>Recent content in React on ltlylfunBlog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 22 Feb 2025 14:20:09 +0800</lastBuildDate><atom:link href="https://blog.ltlyl.fun/tags/react/index.xml" rel="self" type="application/rss+xml"/><item><title>关于React的笔记</title><link>https://blog.ltlyl.fun/p/%E5%85%B3%E4%BA%8Ereact%E7%9A%84%E7%AC%94%E8%AE%B0/</link><pubDate>Sat, 22 Feb 2025 14:20:09 +0800</pubDate><guid>https://blog.ltlyl.fun/p/%E5%85%B3%E4%BA%8Ereact%E7%9A%84%E7%AC%94%E8%AE%B0/</guid><description>&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>本笔记不是零基础笔记&lt;/p>
+&lt;h2 id="react-组件名称">React 组件名称
+&lt;/h2>&lt;p>React 组件是常规的 JavaScript 函数，但 组件的名称必须以&lt;strong>大写字母开头&lt;/strong>，否则它们将无法运行！&lt;/p>
+&lt;h2 id="jsx-的规则">jsx 的规则
+&lt;/h2>&lt;h3 id="jsx-的-return">jsx 的 return
+&lt;/h3>&lt;p>这个组件返回一个带有 src 和 alt 属性的 &lt;img /> 标签。&lt;img /> 写得像 HTML，但实际上是 JavaScript！这种语法被称为 JSX，它允许你在 JavaScript 中嵌入标签。&lt;/p>
+&lt;p>返回语句可以全写在一行上，如下面组件中所示：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">&lt;span class="k">return&lt;/span> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">img&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;https://i.imgur.com/MK3eW3As.jpg&amp;#34;&lt;/span> &lt;span class="na">alt&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;Katherine Johnson&amp;#34;&lt;/span> &lt;span class="p">/&amp;gt;;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是，如果你的标签和 return 关键字不在同一行，则必须把它包裹在一对括号中，如下所示：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-jsx" data-lang="jsx">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">&lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">img&lt;/span> &lt;span class="na">src&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;https://i.imgur.com/MK3eW3As.jpg&amp;#34;&lt;/span> &lt;span class="na">alt&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;Katherine Johnson&amp;#34;&lt;/span> &lt;span class="p">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">4&lt;/span>&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">5&lt;/span>&lt;span class="cl">&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>没有括号包裹的话，任何在 return 下一行的代码都 将被忽略！&lt;/strong>&lt;/p>
+&lt;p>JSX 虽然看起来很像 HTML，但在底层其实被转化为了 JavaScript 对象，你&lt;strong>不能在一个函数中返回多个对象，除非用一个数组把他们包装起来&lt;/strong>。这就是为什么多个 JSX 标签必须要用一个父元素或者 Fragment 来包裹。&lt;/p>
+&lt;h3 id="标签必须闭合">标签必须闭合
+&lt;/h3>&lt;p>JSX 要求标签必须正确闭合。像 &lt;code>&amp;lt;img&amp;gt;&lt;/code> 这样的自闭合标签必须书写成 &lt;code>&amp;lt;img /&amp;gt;&lt;/code>，而像 &lt;code>&amp;lt;li&amp;gt;oranges&lt;/code> 这样只有开始标签的元素必须带有闭合标签，需要改为 &lt;code>&amp;lt;li&amp;gt;oranges&amp;lt;/li&amp;gt;&lt;/code>。&lt;/p>
+&lt;h3 id="使用驼峰式命名法给-所有-大部分属性命名">使用驼峰式命名法给 所有 大部分属性命名！
+&lt;/h3>&lt;p>JSX 最终会被转化为 JavaScript，而 JSX 中的属性也会变成 JavaScript 对象中的键值对。在你自己的组件中，经常会遇到需要用变量的方式读取这些属性的时候。但 JavaScript 对变量的命名有限制。例如，变量名称不能包含 - 符号或者像 class 这样的保留字。&lt;/p>
+&lt;p>这就是为什么在 React 中，大部分 HTML 和 SVG 属性都用驼峰式命名法表示。例如，需要用 strokeWidth 代替 stroke-width。由于 class 是一个保留字，所以在 React 中需要用 className 来代替。这也是 DOM 属性中的命名。&lt;/p>
+&lt;h2 id="默认导出与具名导出">默认导出与具名导出
+&lt;/h2>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>语法&lt;/th>
+&lt;th>导出语句&lt;/th>
+&lt;th>导入语句&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>默认&lt;/td>
+&lt;td>&lt;code>export default function Button() {}&lt;/code>&lt;/td>
+&lt;td>&lt;code>import Button from './Button.js';&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>具名&lt;/td>
+&lt;td>&lt;code>export function Button() {}&lt;/code>&lt;/td>
+&lt;td>&lt;code>import { Button } from './Button.js';&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>一个文件里有且仅有一个 默认 导出，但是可以有任意多个 具名 导出。&lt;/p>
+&lt;p>当使用默认导入时，你可以在 import 语句后面进行任意命名。比如 import Banana from &amp;lsquo;./Button.js&amp;rsquo;，如此你能获得与默认导出一致的内容。相反，对于具名导入，导入和导出的名字必须一致。这也是称其为 具名 导入的原因！&lt;/p>
+&lt;p>通常，文件中仅包含一个组件时，人们会选择默认导出，而当文件中包含多个组件或某个值需要导出时，则会选择具名导出。 无论选择哪种方式，请记得给你的组件和相应的文件命名一个有意义的名字。不建议创建未命名的组件，比如 export default () =&amp;gt; {}，因为这样会使得调试变得异常困难。&lt;/p>
+&lt;h2 id="在大括号---中使用-javascript">在大括号 { } 中使用 JavaScript
+&lt;/h2>&lt;h3 id="在-jsx-中只能在以下两种场景中使用大括号">在 JSX 中，只能在以下两种场景中使用大括号
+&lt;/h3>&lt;p>用作 JSX 标签内的文本：&lt;code>&amp;lt;h1&amp;gt;{name}'s To Do List&amp;lt;/h1&amp;gt;&lt;/code>是有效的，但是 &lt;code>&amp;lt;{tag}&amp;gt;Gregorio Y. Zara's To Do List&amp;lt;/{tag}&amp;gt;&lt;/code> 无效。
+用作紧跟在 = 符号后的 属性：&lt;code>src={avatar}&lt;/code> 会读取 &lt;code>avatar&lt;/code> 变量，但是 &lt;code>src=&amp;quot;{avatar}&amp;quot;&lt;/code> 只会传一个字符串 &lt;code>{avatar}&lt;/code>。&lt;/p>
+&lt;h3 id="使用-双大括号jsx-中的-css-和-对象">使用 “双大括号”：JSX 中的 CSS 和 对象
+&lt;/h3>&lt;p>除了字符串、数字和其它 JavaScript 表达式，你甚至可以在 JSX 中传递对象。对象也用大括号表示，例如 &lt;code>{ name: &amp;quot;Hedy Lamarr&amp;quot;, inventions: 5 }&lt;/code>。因此，为了能在 JSX 中传递，你必须用另一对额外的大括号包裹对象：&lt;code>person={{ name: &amp;quot;Hedy Lamarr&amp;quot;, inventions: 5 }}&lt;/code>。&lt;/p>
+&lt;p>你可能在 JSX 的内联 CSS 样式中就已经见过这种写法了。React 不要求你使用内联样式（使用 CSS 类就能满足大部分情况）。但是当你需要内联样式的时候，你可以给 style 属性传递一个对象：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="ln"> 1&lt;/span>&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="n">TodoList&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 2&lt;/span>&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 3&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ul&lt;/span> &lt;span class="n">style&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 4&lt;/span>&lt;span class="cl"> &lt;span class="n">backgroundColor&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;black&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 5&lt;/span>&lt;span class="cl"> &lt;span class="n">color&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;pink&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 6&lt;/span>&lt;span class="cl"> &lt;span class="p">}}&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 7&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Improve&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">videophone&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 8&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Prepare&lt;/span> &lt;span class="n">aeronautics&lt;/span> &lt;span class="n">lectures&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 9&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">Work&lt;/span> &lt;span class="n">on&lt;/span> &lt;span class="n">the&lt;/span> &lt;span class="n">alcohol&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">fuelled&lt;/span> &lt;span class="n">engine&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">li&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">10&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">ul&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">11&lt;/span>&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">12&lt;/span>&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意，内联 style 属性 使用驼峰命名法编写。例如，HTML &lt;code>&amp;lt;ul style=&amp;quot;background-color: black&amp;quot;&amp;gt;&lt;/code> 在你的组件里应该写成 &lt;code>&amp;lt;ul style={{ backgroundColor: 'black' }}&amp;gt;&lt;/code>。&lt;/p>
+&lt;p>所以当你下次在 JSX 中看到 &lt;code>{{ }}&lt;/code>时，就知道它只不过是包在大括号里的一个对象罢了！&lt;/p>
+&lt;h2 id="props">props
+&lt;/h2>&lt;ul>
+&lt;li>要传递 props，请将它们添加到 JSX，就像使用 HTML 属性一样。&lt;/li>
+&lt;li>要读取 props，请使用 &lt;code>function Avatar({ person, size })&lt;/code> 解构语法。&lt;/li>
+&lt;li>你可以指定一个默认值，如 size = 100，用于缺少值或值为 undefined 的 props 。&lt;/li>
+&lt;li>你可以使用 &lt;code>&amp;lt;Avatar {...props} /&amp;gt; &lt;/code>JSX 展开语法转发所有 props，但不要过度使用它！&lt;/li>
+&lt;li>像 &lt;code>&amp;lt;Card&amp;gt;&amp;lt;Avatar /&amp;gt;&amp;lt;/Card&amp;gt;&lt;/code> 这样的嵌套 JSX，将被视为 Card 组件的 children prop。&lt;/li>
+&lt;li>Props 是只读的时间快照：每次渲染都会收到新版本的 props。&lt;/li>
+&lt;li>你不能改变 props。当你需要交互性时，你可以设置 state。&lt;/li>
+&lt;/ul>
+&lt;h2 id="条件渲染">条件渲染
+&lt;/h2>&lt;ul>
+&lt;li>在 React，你可以使用 JavaScript 来控制分支逻辑。&lt;/li>
+&lt;li>你可以使用 if 语句来选择性地返回 JSX 表达式。&lt;/li>
+&lt;li>你可以选择性地将一些 JSX 赋值给变量，然后用大括号将其嵌入到其他 JSX 中。&lt;/li>
+&lt;li>在 JSX 中，&lt;code>{cond ? &amp;lt;A /&amp;gt; : &amp;lt;B /&amp;gt;}&lt;/code> 表示 “当 cond 为真值时, 渲染 &lt;code>&amp;lt;A /&amp;gt;&lt;/code>，否则 &lt;code>&amp;lt;B /&amp;gt;&lt;/code>”。&lt;/li>
+&lt;li>在 JSX 中，&lt;code>{cond &amp;amp;&amp;amp; &amp;lt;A /&amp;gt;}&lt;/code> 表示 “当 cond 为真值时, 渲染 &lt;A />，否则不进行渲染”。&lt;/li>
+&lt;li>快捷的表达式很常见，但如果你更倾向于使用 if，你也可以不使用它们。&lt;/li>
+&lt;/ul>
+&lt;h2 id="key">key
+&lt;/h2>&lt;h3 id="如何设定-key-值">如何设定 key 值
+&lt;/h3>&lt;p>不同来源的数据往往对应不同的 key 值获取方式：&lt;/p>
+&lt;p>来自数据库的数据： 如果你的数据是从数据库中获取的，那你可以直接使用数据表中的主键，因为它们天然具有唯一性。
+本地产生数据： 如果你数据的产生和保存都在本地（例如笔记软件里的笔记），那么你可以使用一个自增计数器或者一个类似 uuid 的库来生成 key。&lt;/p>
+&lt;h3 id="key-需要满足的条件">key 需要满足的条件
+&lt;/h3>&lt;p>key 值在兄弟节点之间必须是唯一的。 不过不要求全局唯一，在不同的数组中可以使用相同的 key。&lt;/p>
+&lt;p>key 值不能改变，否则就失去了使用 key 的意义！所以千万不要在渲染时动态地生成 key。&lt;/p>
+&lt;h3 id="react-中为什么需要-key">React 中为什么需要 key？
+&lt;/h3>&lt;p>设想一下，假如你桌面上的文件都没有文件名，取而代之的是，你需要通过文件的位置顺序来区分它们———第一个文件，第二个文件，以此类推。也许你也不是不能接受这种方式，可是一旦你删除了其中的一个文件，这种组织方式就会变得混乱无比。原来的第二个文件可能会变成第一个文件，第三个文件会成为第二个文件……&lt;/p>
+&lt;p>React 里需要 key 和文件夹里的文件需要有文件名的道理是类似的。它们（key 和文件名）都让我们可以从众多的兄弟元素中唯一标识出某一项（JSX 节点或文件）。而一个精心选择的 key 值所能提供的信息远远不止于这个元素在数组中的位置。即使元素的位置在渲染的过程中发生了改变，它提供的 key 值也能让 React 在整个生命周期中一直认得它。&lt;/p>
+&lt;h2 id="保持组件纯粹">保持组件纯粹
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>一个组件必须是纯粹的，就意味着：&lt;/p>
+&lt;ul>
+&lt;li>只负责自己的任务。 它不会更改在该函数调用前就已存在的对象或变量。&lt;/li>
+&lt;li>输入相同，则输出相同。 给定相同的输入，组件应该总是返回相同的 JSX。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>渲染随时可能发生，因此组件不应依赖于彼此的渲染顺序。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>你不应该改变任何用于组件渲染的输入。这包括 props、state 和 context。通过 “设置” state 来更新界面，而不要改变预先存在的对象。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>努力在你返回的 JSX 中表达你的组件逻辑。当你需要“改变事物”时，你通常希望在事件处理程序中进行。作为最后的手段，你可以使用 useEffect。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="传递给事件的函数">传递给事件的函数
+&lt;/h2>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>传递一个函数（正确）&lt;/th>
+&lt;th>调用一个函数（错误）&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>&amp;lt;button onClick={handleClick}&amp;gt;&lt;/code>&lt;/td>
+&lt;td>&lt;code>&amp;lt;button onClick={handleClick()}&amp;gt;&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>区别很微妙。在第一个示例中，handleClick 函数作为 onClick 事件处理函数传递。这会让 React 记住它，并且只在用户点击按钮时调用你的函数。&lt;/p>
+&lt;p>在第二个示例中，handleClick() 中最后的 () 会在 渲染 过程中 立即 触发函数，即使没有任何点击。这是因为位于 JSX {} 之间的 JavaScript 会立即执行。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>传递一个函数（正确）&lt;/th>
+&lt;th>调用一个函数（错误）&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>&amp;lt;button onClick={() =&amp;gt; alert('...')}&amp;gt;&lt;/code>&lt;/td>
+&lt;td>&lt;code>&amp;lt;button onClick={alert('...')}&amp;gt;&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>如果按如下方式传递内联代码，并不会在点击时触发，而是会在每次组件渲染时触发：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">// 这个 alert 在组件渲染时触发，而不是点击时触发！
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl">&amp;lt;button onClick={alert(&amp;#39;你点击了我！&amp;#39;)}&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果你想要定义内联事件处理函数，请将其包装在匿名函数中，如下所示：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">&amp;lt;button onClick={() =&amp;gt; alert(&amp;#39;你点击了我！&amp;#39;)}&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里创建了一个稍后调用的函数，而不会在每次渲染时执行其内部代码。&lt;/p>
+&lt;p>在这两种情况下，你都应该传递一个函数：&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>&amp;lt;button onClick={handleClick}&amp;gt;&lt;/code> 传递了 handleClick 函数。&lt;/li>
+&lt;li>&lt;code>&amp;lt;button onClick={() =&amp;gt; alert('...')}&amp;gt;&lt;/code> 传递了 () =&amp;gt; alert(&amp;rsquo;&amp;hellip;&amp;rsquo;) 函数。&lt;/li>
+&lt;/ul>
+&lt;h2 id="事件的传播">事件的传播
+&lt;/h2>&lt;p>在 React 中所有事件都会传播，除了 onScroll，它仅适用于你附加到的 JSX 标签。&lt;/p>
+&lt;h2 id="阻止传播">阻止传播
+&lt;/h2>&lt;p>事件处理函数接收一个 事件对象 作为唯一的参数。按照惯例，它通常被称为 e ，代表 “event”（事件）。你可以使用此对象来读取有关事件的信息。&lt;/p>
+&lt;p>这个事件对象还允许你阻止传播。如果你想阻止一个事件到达父组件，你需可以调用 e.stopPropagation() ：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="ln"> 1&lt;/span>&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="ne">Button&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">onClick&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">children&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 2&lt;/span>&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 3&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span> &lt;span class="n">onClick&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">e&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 4&lt;/span>&lt;span class="cl"> &lt;span class="n">e&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">stopPropagation&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 5&lt;/span>&lt;span class="cl"> &lt;span class="n">onClick&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 6&lt;/span>&lt;span class="cl"> &lt;span class="p">}}&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 7&lt;/span>&lt;span class="cl"> &lt;span class="p">{&lt;/span>&lt;span class="n">children&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 8&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 9&lt;/span>&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">10&lt;/span>&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">11&lt;/span>&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">12&lt;/span>&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="n">Toolbar&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">13&lt;/span>&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">14&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">div&lt;/span> &lt;span class="n">className&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;Toolbar&amp;#34;&lt;/span> &lt;span class="n">onClick&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">15&lt;/span>&lt;span class="cl"> &lt;span class="n">alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;你点击了 toolbar ！&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">16&lt;/span>&lt;span class="cl"> &lt;span class="p">}}&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">17&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="ne">Button&lt;/span> &lt;span class="n">onClick&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;正在播放！&amp;#39;&lt;/span>&lt;span class="p">)}&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">18&lt;/span>&lt;span class="cl"> &lt;span class="err">播放电影&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">19&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="ne">Button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">20&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="ne">Button&lt;/span> &lt;span class="n">onClick&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;正在上传！&amp;#39;&lt;/span>&lt;span class="p">)}&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">21&lt;/span>&lt;span class="cl"> &lt;span class="err">上传图片&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">22&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="ne">Button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">23&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">24&lt;/span>&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">25&lt;/span>&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="阻止默认行为">阻止默认行为
+&lt;/h2>&lt;p>某些浏览器事件具有与事件相关联的默认行为。例如，点击 &lt;form> 表单内部的按钮会触发表单提交事件，默认情况下将重新加载整个页面&lt;/p>
+&lt;p>你可以调用事件对象中的 e.preventDefault() 来阻止这种情况发生&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="ln"> 1&lt;/span>&lt;span class="cl">&lt;span class="k">export&lt;/span> &lt;span class="n">default&lt;/span> &lt;span class="n">function&lt;/span> &lt;span class="n">Signup&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 2&lt;/span>&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 3&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">form&lt;/span> &lt;span class="n">onSubmit&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">e&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 4&lt;/span>&lt;span class="cl"> &lt;span class="n">e&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">preventDefault&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 5&lt;/span>&lt;span class="cl"> &lt;span class="n">alert&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;提交表单！&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 6&lt;/span>&lt;span class="cl"> &lt;span class="p">}}&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 7&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">input&lt;/span> &lt;span class="o">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 8&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="err">发送&lt;/span>&lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">button&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 9&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">form&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">10&lt;/span>&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">11&lt;/span>&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="usestate">useState
+&lt;/h2>&lt;h3 id="设置-state-不会更改现有渲染中的变量但会请求一次新的渲染">设置 state 不会更改现有渲染中的变量，但会请求一次新的渲染。
+&lt;/h3>&lt;p>设置 state 的调用是在告诉 React：&amp;ldquo;组件状态已更新，请安排一个新的渲染周期来反映这一变化。&amp;rdquo;&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>当你调用 setState 时，React 并不会立即修改当前渲染（即已经生成的虚拟 DOM）中的变量。这意味着，在当前的渲染过程中，你依然看到的是旧的状态值。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>setState 调用其实是异步的。它会在内部标记组件需要更新，但真正的更新和重新渲染会在稍后的时机发生（通常是在事件处理结束或其他合适的时机）。更新后的状态会在下一次渲染时生效。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>当新的渲染触发后，React 会创建一个全新的虚拟 DOM，并使用更新后的 state 生成新的 UI，然后再比较前后两次虚拟 DOM 的变化，并只更新浏览器中实际变动的部分（即“调和”过程）。&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>总结来说，设置 state 不会修改当前渲染的变量，它只是请求一次新的渲染，在下一个渲染周期中使用新的 state 来重新计算和更新 UI。这种机制有助于保持组件状态的不可变性和渲染的一致性。&lt;/p>
+&lt;h3 id="react-会在事件处理函数执行完成之后处理-state-更新这被称为批处理">React 会在事件处理函数执行完成之后处理 state 更新。这被称为批处理。
+&lt;/h3>&lt;p>只有在你的事件处理函数及其中任何代码执行完成 之后，UI 才会更新。这种特性也就是 批处理，它会使你的 React 应用运行得更快。它还会帮你避免处理只 ​​ 更新了一部分 state 变量的令人困惑的“半成品”渲染。&lt;/p>
+&lt;p>React 不会跨 多个 需要刻意触发的事件（如点击）进行批处理——每次点击都是单独处理的。请放心，React 只会在一般来说安全的情况下才进行批处理。这可以确保，例如，如果第一次点击按钮会禁用表单，那么第二次点击就不会再次提交它。&lt;/p>
+&lt;h3 id="要在一个事件中多次更新某些-state你可以使用-setnumbern--n--1-更新函数">要在一个事件中多次更新某些 state，你可以使用 setNumber(n =&amp;gt; n + 1) 更新函数。
+&lt;/h3>&lt;h3 id="将-state-视为只读的">将 state 视为只读的
+&lt;/h3>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">onPointerMove={e =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl"> position.x = e.clientX;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl"> position.y = e.clientY;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">4&lt;/span>&lt;span class="cl">}}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这段代码直接修改了 上一次渲染中 分配给 position 的对象。但是因为并没有使用 state 的设置函数，React 并不知道对象已更改。所以 React 没有做出任何响应。虽然在一些情况下，直接修改 state 可能是有效的，但并不推荐这么做。你应该把在渲染过程中可以访问到的 state 视为只读的。&lt;/p>
+&lt;p>在这种情况下，为了真正地 触发一次重新渲染，你需要创建一个新对象并把它传递给 state 的设置函数：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">onPointerMove={e =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl"> setPosition({
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl"> x: e.clientX,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">4&lt;/span>&lt;span class="cl"> y: e.clientY
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">5&lt;/span>&lt;span class="cl"> });
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">6&lt;/span>&lt;span class="cl">}}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>通过使用 setPosition，你在告诉 React：&lt;/p>
+&lt;p>使用这个新的对象替换 position 的值,然后再次渲染这个组件&lt;/p>
+&lt;h3 id="局部-mutation-是可以接受的">局部 mutation 是可以接受的
+&lt;/h3>&lt;p>像这样的代码是有问题的，因为它改变了 state 中现有的对象：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">position.x = e.clientX;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl">position.y = e.clientY;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是像这样的代码就 没有任何问题，因为你改变的是你刚刚创建的一个新的对象：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">nextPosition&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl">&lt;span class="n">nextPosition&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clientX&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl">&lt;span class="n">nextPosition&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clientY&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">4&lt;/span>&lt;span class="cl">&lt;span class="n">setPosition&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">nextPosition&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>事实上，它完全等同于下面这种写法：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">setPosition({
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl"> x: e.clientX,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl"> y: e.clientY
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">4&lt;/span>&lt;span class="cl">});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>只有当你改变已经处于 state 中的 现有 对象时，mutation 才会成为问题。而修改一个你刚刚创建的对象就不会出现任何问题，因为 还没有其他的代码引用它。改变它并不会意外地影响到依赖它的东西。这叫做“局部 mutation”。你甚至可以 在渲染的过程中 进行“局部 mutation”的操作。这种操作既便捷又没有任何问题！&lt;/p>
+&lt;h3 id="使用展开语法复制对象">使用展开语法复制对象
+&lt;/h3>&lt;p>下面这行代码修改了上一次渲染中的 state：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">person.firstName = e.target.value;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>想要实现你的需求，最可靠的办法就是创建一个新的对象并将它传递给 setPerson。但是在这里，你还需要 把当前的数据复制到新对象中，因为你只改变了其中一个字段：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">setPerson({
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl"> firstName: e.target.value, // 从 input 中获取新的 first name
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl"> lastName: person.lastName,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">4&lt;/span>&lt;span class="cl"> email: person.email
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">5&lt;/span>&lt;span class="cl">});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>你可以使用&lt;code>...&lt;/code>对象展开 语法，这样你就不需要单独复制每个属性。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">setPerson({
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl"> ...person, // 复制上一个 person 中的所有字段
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl"> firstName: e.target.value // 但是覆盖 firstName 字段
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">4&lt;/span>&lt;span class="cl">});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>对于大型表单，将所有数据都存放在同一个对象中是非常方便的——前提是你能够正确地更新它！&lt;/p>
+&lt;p>请注意&lt;code>...&lt;/code>展开语法本质是是“浅拷贝”——它只会复制一层。这使得它的执行速度很快，但是也意味着当你想要更新一个嵌套属性时，你必须得多次使用展开语法。&lt;/p>
+&lt;h3 id="更新一个嵌套对象">更新一个嵌套对象
+&lt;/h3>&lt;p>考虑下面这种结构的嵌套对象：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">person&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">setPerson&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">useState&lt;/span>&lt;span class="p">({&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl"> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Niki de Saint Phalle&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl"> &lt;span class="n">artwork&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">4&lt;/span>&lt;span class="cl"> &lt;span class="n">title&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Blue Nana&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">5&lt;/span>&lt;span class="cl"> &lt;span class="n">city&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;Hamburg&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">6&lt;/span>&lt;span class="cl"> &lt;span class="n">image&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;https://i.imgur.com/Sd1AgUOm.jpg&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">7&lt;/span>&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">8&lt;/span>&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果你想要更新 person.artwork.city 的值，用 mutation 来实现的方法非常容易理解：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">person.artwork.city = &amp;#39;New Delhi&amp;#39;;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是在 React 中，你需要将 state 视为不可变的！为了修改 city 的值，你首先需要创建一个新的 artwork 对象（其中预先填充了上一个 artwork 对象中的数据），然后创建一个新的 person 对象，并使得其中的 artwork 属性指向新创建的 artwork 对象：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">nextArtwork&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="o">...&lt;/span>&lt;span class="n">person&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">artwork&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">city&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;New Delhi&amp;#39;&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">nextPerson&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="o">...&lt;/span>&lt;span class="n">person&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">artwork&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">nextArtwork&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl">&lt;span class="n">setPerson&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">nextPerson&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者，写成一个函数调用：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">setPerson({
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl"> ...person, // 复制其它字段的数据
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl"> artwork: { // 替换 artwork 字段
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">4&lt;/span>&lt;span class="cl"> ...person.artwork, // 复制之前 person.artwork 中的数据
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">5&lt;/span>&lt;span class="cl"> city: &amp;#39;New Delhi&amp;#39; // 但是将 city 的值替换为 New Delhi！
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">6&lt;/span>&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">7&lt;/span>&lt;span class="cl">});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="使用-immer-编写简洁的更新逻辑">使用 Immer 编写简洁的更新逻辑
+&lt;/h3>&lt;p>如果你的 state 有多层的嵌套，你或许应该考虑 将其扁平化。但是，如果你不想改变 state 的数据结构，你可能更喜欢用一种更便捷的方式来实现嵌套展开的效果。Immer 是一个非常流行的库，它可以让你使用简便但可以直接修改的语法编写代码，并会帮你处理好复制的过程。通过使用 Immer，你写出的代码看起来就像是你“打破了规则”而直接修改了对象：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">updatePerson(draft =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl"> draft.artwork.city = &amp;#39;Lagos&amp;#39;;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl">});
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是不同于一般的 mutation，它并不会覆盖之前的 state！&lt;/p>
+&lt;p>尝试使用 Immer:&lt;/p>
+&lt;ul>
+&lt;li>运行 &lt;code>npm install use-immer&lt;/code> 添加 Immer 依赖&lt;/li>
+&lt;li>用 &lt;code>import { useImmer } from 'use-immer'&lt;/code> 替换掉 &lt;code>import { useState } from 'react'&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h3 id="在没有-mutation-的前提下更新数组">在没有 mutation 的前提下更新数组
+&lt;/h3>&lt;p>在 JavaScript 中，数组只是另一种对象。同对象一样，你需要将 React state 中的数组视为只读的。这意味着你不应该使用类似于 arr[0] = &amp;lsquo;bird&amp;rsquo; 这样的方式来重新分配数组中的元素，也不应该使用会直接修改原始数组的方法，例如 push() 和 pop()。&lt;/p>
+&lt;p>相反，每次要更新一个数组时，你需要把一个新的数组传入 state 的 setting 方法中。为此，你可以通过使用像 filter() 和 map() 这样不会直接修改原始值的方法，从原始数组生成一个新的数组。然后你就可以将 state 设置为这个新生成的数组。&lt;/p>
+&lt;p>下面是常见数组操作的参考表。当你操作 React state 中的数组时，你需要避免使用左列的方法，而首选右列的方法：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>操作&lt;/th>
+&lt;th>避免使用 (会改变原始数组)&lt;/th>
+&lt;th>推荐使用 (会返回一个新数组）&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>添加元素&lt;/td>
+&lt;td>push，unshift&lt;/td>
+&lt;td>concat，[&amp;hellip;arr] 展开语法&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>删除元素&lt;/td>
+&lt;td>pop，shift，splice&lt;/td>
+&lt;td>filter，slice&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>替换元素&lt;/td>
+&lt;td>splice，arr[i] = &amp;hellip; 赋值&lt;/td>
+&lt;td>map&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>排序&lt;/td>
+&lt;td>reverse，sort&lt;/td>
+&lt;td>先将数组复制一份&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="useref">useRef
+&lt;/h2>&lt;h3 id="给你的组件添加-ref">给你的组件添加 ref
+&lt;/h3>&lt;p>你可以通过从 React 导入 useRef Hook 来为你的组件添加一个 ref：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">import { useRef } from &amp;#39;react&amp;#39;;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在你的组件内，调用 useRef Hook 并传入你想要引用的初始值作为唯一参数。例如，这里的 ref 引用的值是“0”：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">ref&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">useRef&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>useRef 返回一个这样的对象:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl"> current: 0 // 你向 useRef 传入的值
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>与 state 不同的是，ref 是一个普通的 JavaScript 对象，具有可以被读取和修改的 current 属性。&lt;/p>
+&lt;p>你可以用 ref.current 属性访问该 ref 的当前值。这个值是有意被设置为可变的，意味着你既可以读取它也可以写入它。就像一个 React 追踪不到的、用来存储组件信息的秘密“口袋”。（这就是让它成为 React 单向数据流的“脱围机制”的原因）&lt;/p>
+&lt;h3 id="ref-和-state-的不同之处">ref 和 state 的不同之处
+&lt;/h3>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>&lt;/th>
+&lt;th>useRef&lt;/th>
+&lt;th>useState&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>返回值&lt;/td>
+&lt;td>useRef(initialValue) 返回 &lt;code>{ current: initialValue }&lt;/code>&lt;/td>
+&lt;td>useState(initialValue) 返回 &lt;code>[value, setValue]&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>触发渲染&lt;/td>
+&lt;td>更改时不会触发重新渲染&lt;/td>
+&lt;td>更改时触发重新渲染&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>可变性&lt;/td>
+&lt;td>可变 —— 你可以在渲染过程之外修改和更新 &lt;code>current&lt;/code> 的值。&lt;/td>
+&lt;td>“不可变” —— 你必须使用 state 设置函数来修改 state 变量，从而排队重新渲染。&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>读取/写入时机&lt;/td>
+&lt;td>你不应在渲染期间读取（或写入） &lt;code>current&lt;/code> 值。&lt;/td>
+&lt;td>你可以随时读取 state。但是，每次渲染都有自己不变的 state 快照。&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="使用-ref-操作-dom">使用 ref 操作 DOM
+&lt;/h3>&lt;p>要访问由 React 管理的 DOM 节点，首先，引入 useRef Hook：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">import { useRef } from &amp;#39;react&amp;#39;;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后，在你的组件中使用它声明一个 ref：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="n">myRef&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">useRef&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">null&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后，将 ref 作为 ref 属性值传递给想要获取的 DOM 节点的 JSX 标签：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">&amp;lt;div ref={myRef}&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>useRef Hook 返回一个对象，该对象有一个名为 current 的属性。最初，myRef.current 是 null。当 React 为这个 &lt;div> 创建一个 DOM 节点时，React 会把对该节点的引用放入 myRef.current。然后，你可以从 事件处理器 访问此 DOM 节点，并使用在其上定义的内置浏览器 API。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">// 你可以使用任意浏览器 API，例如：
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl">myRef.current.scrollIntoView();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="useeffect">useEffect
+&lt;/h2>&lt;h3 id="如何编写-effect">如何编写 Effect
+&lt;/h3>&lt;p>要编写一个 Effect, 请遵循以下三个步骤：&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>&lt;em>声明 Effect&lt;/em>&lt;/strong>。通常 Effect 会在每次 提交 后运行。&lt;/li>
+&lt;li>&lt;strong>指定 Effect 依赖&lt;/strong>。大多数 Effect 应该按需运行，而不是在每次渲染后都运行。例如，淡入动画应该只在组件出现时触发。连接和断开服务器的操作只应在组件出现和消失时，或者切换聊天室时执行。你将通过指定 依赖项 来学习如何控制这一点。&lt;/li>
+&lt;li>&lt;strong>必要时添加清理操作&lt;/strong>。一些 Effect 需要指定如何停止、撤销，或者清除它们所执行的操作。例如，“连接”需要“断开”，“订阅”需要“退订”，而“获取数据”需要“取消”或者“忽略”。你将学习如何通过返回一个 清理函数 来实现这些。&lt;/li>
+&lt;/ol>
+&lt;h3 id="注意事项">注意事项
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>每当你的组件渲染时，React 会先更新页面，然后再运行 useEffect 中的代码。换句话说，useEffect &lt;strong>会“延迟”一段代码的运行，直到渲染结果反映在页面上&lt;/strong>。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>默认情况下，Effect 会在 每次 渲染后运行。正因如此，以下代码会陷入死循环：&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">&lt;span class="k">const&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">setCount&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">useState&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl">&lt;span class="n">useEffect&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl"> &lt;span class="n">setCount&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">count&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">4&lt;/span>&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>没有依赖数组和使用空数组 [] 作为依赖数组，行为是不同的：&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln"> 1&lt;/span>&lt;span class="cl">useEffect(() =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 2&lt;/span>&lt;span class="cl"> // 这里的代码会在每次渲染后运行
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 3&lt;/span>&lt;span class="cl">});
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 4&lt;/span>&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 5&lt;/span>&lt;span class="cl">useEffect(() =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 6&lt;/span>&lt;span class="cl"> // 这里的代码只会在组件挂载（首次出现）时运行
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 7&lt;/span>&lt;span class="cl">}, []);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 8&lt;/span>&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 9&lt;/span>&lt;span class="cl">useEffect(() =&amp;gt; {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">10&lt;/span>&lt;span class="cl"> // 这里的代码不但会在组件挂载时运行，而且当 a 或 b 的值自上次渲染后发生变化后也会运行
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">11&lt;/span>&lt;span class="cl">}, [a, b]);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>
+&lt;p>为什么依赖数组中可以省略 ref?&lt;/p>
+&lt;p>这是因为 ref 具有 稳定 的标识：React 确保你在 每轮渲染中调用同一个 useRef 时，总能获得相同的对象。ref 不会改变，所以它不会导致重新运行 Effect。因此，在依赖数组中它可有可无。&lt;/p>
+&lt;p>useState 返回的 set 函数 也具有稳定的标识，因此它们通常也会被省略。如果在省略某个依赖项时 linter 不会报错，那么这么做就是安全的。&lt;/p>
+&lt;p>省略始终稳定的依赖项仅在 linter 能“看到”对象是稳定的时候才有效。例如，如果 ref 是从父组件传递过来的，则必须在依赖数组中指定它。这很有必要，因为你无法确定父组件是一直传递相同的 ref，还是根据条件传递不同的 ref。所以，你的 Effect 会依赖于被传递的是哪个 ref。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>React 会在每次 Effect 重新运行之前调用清理函数，并在组件卸载（被移除）时最后一次调用清理函数。&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="usememo性能优化的手段">useMemo(性能优化的手段)
+&lt;/h2>&lt;h3 id="用法">用法
+&lt;/h3>&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">useMemo&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;react&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">TodoList&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">todos&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">tab&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">theme&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">4&lt;/span>&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">visibleTodos&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">useMemo&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="n">filterTodos&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">todos&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">tab&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">todos&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">tab&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">5&lt;/span>&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="o">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">6&lt;/span>&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>你需要给 useMemo 传递两样东西：&lt;/p>
+&lt;ul>
+&lt;li>一个没有任何参数的 calculation 函数，像这样 () =&amp;gt;，并且返回任何你想要的计算结果。&lt;/li>
+&lt;li>一个由包含在你的组件中并在 calculation 中使用的所有值组成的 依赖列表。&lt;/li>
+&lt;/ul>
+&lt;p>在初次渲染时，你从 useMemo 得到的 值 将会是你的 calculation 函数执行的结果。&lt;/p>
+&lt;p>在随后的每一次渲染中，React 将会比较前后两次渲染中的 所有依赖项 是否相同。如果通过 Object.is 比较所有依赖项都没有发生变化，那么 useMemo 将会返回之前已经计算过的那个值。否则，React 将会重新执行 calculation 函数并且返回一个新的值。&lt;/p>
+&lt;p>换言之，useMemo 在多次重新渲染中缓存了 calculation 函数计算的结果直到依赖项的值发生变化。&lt;/p>
+&lt;h2 id="usecallback">useCallback
+&lt;/h2>&lt;h3 id="用法-1">用法
+&lt;/h3>&lt;p>当你优化渲染性能的时候，有时需要缓存传递给子组件的函数。让我们先关注一下如何实现，稍后去理解在哪些场景中它是有用的。&lt;/p>
+&lt;p>为了缓存组件中多次渲染的函数，你需要将其定义在 useCallback Hook 中：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="ln"> 1&lt;/span>&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">useCallback&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;react&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 2&lt;/span>&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 3&lt;/span>&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">ProductPage&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">productId&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">referrer&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">theme&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 4&lt;/span>&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">handleSubmit&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">useCallback&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">orderDetails&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 5&lt;/span>&lt;span class="cl"> &lt;span class="n">post&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/product/&amp;#39;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">productId&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s1">&amp;#39;/buy&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 6&lt;/span>&lt;span class="cl"> &lt;span class="n">referrer&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 7&lt;/span>&lt;span class="cl"> &lt;span class="n">orderDetails&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 8&lt;/span>&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 9&lt;/span>&lt;span class="cl"> &lt;span class="p">},&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">productId&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">referrer&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">10&lt;/span>&lt;span class="cl"> &lt;span class="o">//&lt;/span> &lt;span class="o">...&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>你需要传递两个参数给 useCallback：&lt;/p>
+&lt;p>在多次渲染中需要缓存的函数&lt;/p>
+&lt;ul>
+&lt;li>函数内部需要使用到的所有组件内部值的 依赖列表。&lt;/li>
+&lt;li>初次渲染时，在 useCallback 处接收的 返回函数 将会是已经传入的函数。&lt;/li>
+&lt;/ul>
+&lt;p>在之后的渲染中，React 将会使用 Object.is 把 当前的依赖 和已传入之前的依赖进行比较。如果没有任何依赖改变，useCallback 将会返回与之前一样的函数。否则 useCallback 将返回 此次 渲染中传递的函数。&lt;/p>
+&lt;p>简而言之，useCallback 在多次渲染中缓存一个函数，直至这个函数的依赖发生改变。&lt;/p>
+&lt;h2 id="usecallback-与-usememo-有何关系">useCallback 与 useMemo 有何关系？
+&lt;/h2>&lt;p>useMemo 经常与 useCallback 一同出现。当尝试优化子组件时，它们都很有用。他们会 记住（或者说，缓存）正在传递的东西：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="ln"> 1&lt;/span>&lt;span class="cl">&lt;span class="n">import&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">useMemo&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">useCallback&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="n">from&lt;/span> &lt;span class="s1">&amp;#39;react&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 2&lt;/span>&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 3&lt;/span>&lt;span class="cl">&lt;span class="n">function&lt;/span> &lt;span class="n">ProductPage&lt;/span>&lt;span class="p">({&lt;/span> &lt;span class="n">productId&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">referrer&lt;/span> &lt;span class="p">})&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 4&lt;/span>&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">product&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">useData&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/product/&amp;#39;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">productId&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 5&lt;/span>&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 6&lt;/span>&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">requirements&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">useMemo&lt;/span>&lt;span class="p">(()&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="o">//&lt;/span>&lt;span class="err">调用函数并缓存结果&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 7&lt;/span>&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">computeRequirements&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">product&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 8&lt;/span>&lt;span class="cl"> &lt;span class="p">},&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">product&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln"> 9&lt;/span>&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">10&lt;/span>&lt;span class="cl"> &lt;span class="k">const&lt;/span> &lt;span class="n">handleSubmit&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">useCallback&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">orderDetails&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="o">//&lt;/span> &lt;span class="err">缓存函数本身&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">11&lt;/span>&lt;span class="cl"> &lt;span class="n">post&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/product/&amp;#39;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">productId&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s1">&amp;#39;/buy&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">12&lt;/span>&lt;span class="cl"> &lt;span class="n">referrer&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">13&lt;/span>&lt;span class="cl"> &lt;span class="n">orderDetails&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">14&lt;/span>&lt;span class="cl"> &lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">15&lt;/span>&lt;span class="cl"> &lt;span class="p">},&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">productId&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">referrer&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">16&lt;/span>&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">17&lt;/span>&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">18&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">div&lt;/span> &lt;span class="n">className&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">theme&lt;/span>&lt;span class="p">}&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">19&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">ShippingForm&lt;/span> &lt;span class="n">requirements&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">requirements&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="n">onSubmit&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">{&lt;/span>&lt;span class="n">handleSubmit&lt;/span>&lt;span class="p">}&lt;/span> &lt;span class="o">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">20&lt;/span>&lt;span class="cl"> &lt;span class="o">&amp;lt;/&lt;/span>&lt;span class="n">div&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">21&lt;/span>&lt;span class="cl"> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">22&lt;/span>&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>区别在于你需要缓存 什么:&lt;/p>
+&lt;ul>
+&lt;li>useMemo 缓存函数调用的结果。在这里，它缓存了调用 computeRequirements(product) 的结果。除非 product 发生改变，否则它将不会发生变化。这让你向下传递 requirements 时而无需不必要地重新渲染 ShippingForm。必要时，React 将会调用传入的函数重新计算结果。&lt;/li>
+&lt;li>useCallback 缓存函数本身。不像 useMemo，它不会调用你传入的函数。相反，它缓存此函数。从而除非 productId 或 referrer 发生改变，handleSubmit 自己将不会发生改变。这让你向下传递 handleSubmit 函数而无需不必要地重新渲染 ShippingForm。直至用户提交表单，你的代码都将不会运行。&lt;/li>
+&lt;/ul>
+&lt;p>如果你已经熟悉了 useMemo，你可能发现将 useCallback 视为以下内容会很有帮助：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="ln">1&lt;/span>&lt;span class="cl">// 在 React 内部的简化实现
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">2&lt;/span>&lt;span class="cl">function useCallback(fn, dependencies) {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">3&lt;/span>&lt;span class="cl"> return useMemo(() =&amp;gt; fn, dependencies);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="ln">4&lt;/span>&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
